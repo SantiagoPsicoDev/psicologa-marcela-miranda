@@ -1,113 +1,204 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Psicoanálisis | Dra. Marcela</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Caveat:wght@500&family=DM+Serif+Display&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
     <style>
-        body { font-family: 'Outfit', sans-serif; }
+        body { font-family: 'Outfit', sans-serif; scroll-behavior: smooth; }
         .bg-gradient-orange { background: linear-gradient(135deg, #fffaf0 0%, #ffedd5 100%); }
+        
+        /* Estilo para el logo solicitado (Hilitos dorados/blancos) */
+        .logo-container {
+            border: 1px solid #d4af37;
+            background: white;
+            transition: transform 0.3s ease;
+        }
+
+        /* Modal "Mi Camino" */
+        #mi-camino-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            background: rgba(255, 250, 240, 0.98);
+            overflow-y: auto;
+            animation: slideUp 0.5s ease-out;
+        }
+
+        #mi-camino-modal.active { display: block; }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .btn-cerrar {
+            position: fixed;
+            top: 25px;
+            right: 25px;
+            cursor: pointer;
+            background: white;
+            color: #c2410c;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 1px solid #ffedd5;
+            z-index: 1001;
+        }
+
+        .btn-cerrar:hover { transform: rotate(90deg); background: #c2410c; color: white; }
+
+        /* Efecto Flote Polaroid */
+        .polaroid-effect {
+            animation: floating 5s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0%, 100% { transform: translateY(0) rotate(1deg); }
+            50% { transform: translateY(-10px) rotate(0deg); }
+        }
     </style>
 </head>
 <body class="bg-gradient-orange min-h-screen text-stone-800">
 
     <nav class="p-6 flex flex-col md:flex-row justify-between items-center max-w-6xl mx-auto gap-4">
-    <div class="flex items-center gap-4">
-        <div class="bg-stone-900 p-2 rounded-xl shadow-lg">
-            <img 
-                src="logo-marce.png" 
-                alt="Logo Dra. Marcela Miranda Psicoanálisis" 
-                class="h-12 w-auto object-contain"
-            >
+        <div class="flex items-center gap-4">
+            <div class="logo-container p-2 rounded-xl shadow-lg">
+                <img src="logo-marce.png" alt="Logo Dra. Marcela" class="h-20 w-auto object-contain">
+            </div>
+            <h1 class="text-xl font-bold text-orange-900 tracking-tight hidden md:block">Psique & Raíz</h1>
         </div>
-        <h1 class="text-xl font-bold text-orange-900 tracking-tight hidden md:block">Psique & Raíz</h1>
-    </div>
-    
-    <div class="flex items-center gap-6">
-        <a href="#proceso" class="text-sm font-medium text-stone-500 hover:text-orange-600 transition">Enfoque</a>
-        <a href="https://wa.me/5217222616255" class="bg-orange-600 text-white px-6 py-2 rounded-full text-sm font-semibold hover:bg-orange-700 transition shadow-md">
-            Agendar Cita
-        </a>
-    </div>
-</nav>
+        
+        <div class="flex items-center gap-6">
+            <a href="javascript:void(0)" onclick="abrirCamino()" class="text-sm font-medium text-stone-500 hover:text-orange-600 transition flex items-center gap-2">
+                <i class="fas fa-route"></i> Mi Camino
+            </a>
+            <a href="https://wa.me/5217222616255" class="bg-orange-600 text-white px-6 py-2 rounded-full text-sm font-semibold hover:bg-orange-700 transition shadow-md">
+                Agendar Cita
+            </a>
+        </div>
+    </nav>
 
     <main class="max-w-6xl mx-auto px-6 py-12 grid md:grid-cols-2 gap-12 items-center">
-        
         <div class="space-y-6">
             <span class="text-orange-600 font-semibold tracking-widest uppercase text-xs">Transforma tu sufrimiento en crecimiento</span>
-            <h2 class="text-4xl md:text-5xl font-bold leading-tight text-stone-900">
+            <h2 class="text-4xl md:text-5xl font-bold leading-tight text-stone-900" style="font-family: 'DM Serif Display', serif;">
                 Descubre el Psicoanálisis: Sana desde la <span class="text-orange-700 italic">Raíz</span>
             </h2>
             <p class="text-lg text-stone-600 leading-relaxed">
                 ¿Qué es el Psicoanálisis? Es un método profundo para explorar el inconsciente e iluminar lo sumergido. Navega con claridad.
             </p>
             
+            <div class="bg-white/50 p-4 rounded-xl border-l-4 border-orange-600 text-sm italic text-stone-700">
+                <i class="fas fa-check-circle text-orange-600 mr-2"></i> Sesión presencial o en línea. <br>
+                <i class="fas fa-users text-orange-600 mr-2"></i> Atención individual o en pareja.
+            </div>
+
             <div class="flex flex-wrap gap-4 pt-4">
-                <a href="#agenda" class="bg-orange-600 text-white px-8 py-4 rounded-2xl font-semibold shadow-lg hover:bg-orange-700 transition-all">
+                <a href="https://wa.me/5217222616255" class="bg-orange-600 text-white px-8 py-4 rounded-2xl font-semibold shadow-lg hover:bg-orange-700 transition-all">
                     📅 Agenda tu sesión
                 </a>
             </div>
         </div>
 
-        <div class="relative">
-    <div class="bg-white p-4 pb-8 rounded-2xl shadow-2xl rotate-1 hover:rotate-0 transition-all duration-500">
-        <img 
-            src="psicologa-marce.jpeg" 
-            alt="Dra. Marcela Miranda" 
-            class="w-full h-auto max-h-[600px] object-contain rounded-xl grayscale-[20%]"
-        >
-        <p class="mt-6 text-center text-stone-400 font-serif italic">"El alma tiene sus propias raíces. Dra. Marcela Miranda"</p>
-    </div>
-</div>
+        <div class="relative polaroid-effect">
+            <div class="bg-white p-4 pb-8 rounded-2xl shadow-2xl border border-stone-100">
+                <img src="psicologa-marce.jpeg" alt="Dra. Marcela Miranda" class="w-full h-auto max-h-[550px] object-contain rounded-xl grayscale-[10%]">
+                <p class="mt-6 text-center text-stone-700 font-serif italic text-lg leading-snug">
+                    "Lo que importa no es lo que te ocurre, sino cómo reaccionas a ello."
+                </p>
+                <p class="text-center text-stone-400 text-xs mt-3 uppercase tracking-widest">— Dra. Marcela Miranda —</p>
+            </div>
+        </div>
     </main>
 
-    <section class="max-w-5xl mx-auto px-6 py-20 bg-white/40 rounded-[3rem] backdrop-blur-sm">
+    <section class="max-w-6xl mx-auto px-6 py-16 border-t border-orange-100">
         <div class="grid md:grid-cols-2 gap-12">
             <div>
                 <h3 class="text-2xl font-bold text-orange-900 mb-4">¿Cómo puedo ayudarte?</h3>
                 <p class="text-stone-600 text-sm leading-relaxed mb-6">
-                    Tu sufrimiento emocional —ansiedad, vacío o relaciones tóxicas— a menudo nace de heridas no resueltas. Avanzamos paso a paso para lograr una transformación honda.
+                    Tu sufrimiento emocional —ansiedad, vacío o relaciones tóxicas— a menudo nace de heridas no resueltas. Avanzamos paso a paso.
                 </p>
                 <ul class="space-y-3 text-sm">
-                    <li class="flex items-center gap-2">✨ <strong>Enfoque en la raíz:</strong> No parches temporales.</li>
-                    <li class="flex items-center gap-2">✨ <strong>Proceso dinámico:</strong> Diálogo libre y sueños.</li>
-                    <li class="flex items-center gap-2">✨ <strong>Duradero:</strong> Autoconocimiento genuino.</li>
+                    <li>✨ <strong>Enfoque en la raíz:</strong> No parches temporales.</li>
+                    <li>✨ <strong>Proceso dinámico:</strong> Diálogo libre y sueños.</li>
                 </ul>
             </div>
-            <div class="bg-orange-100/50 p-8 rounded-3xl border border-orange-200">
-                <h3 class="text-xl font-bold mb-4">El Camino</h3>
-                <div class="space-y-4 text-xs text-stone-700">
-                    <p><strong>1. Exploración:</strong> Escuchamos tu dolor inicial.</p>
-                    <p><strong>2. Buceo:</strong> Analizamos lo reprimido.</p>
-                    <p><strong>3. Elaboración:</strong> Reestructuramos tu psiquismo.</p>
-                    <p class="pt-4 font-bold text-orange-800 text-sm italic">"Resultados reales: ciencia del alma."</p>
-                </div>
+            <div class="bg-stone-900 text-white p-8 rounded-3xl shadow-xl text-center">
+                <h2 class="text-2xl font-bold mb-4">¿Lista para el cambio?</h2>
+                <p class="text-stone-400 text-sm mb-6 font-light">Sesiones presenciales, virtuales o en pareja.</p>
+                <a href="https://wa.me/5217222616255" class="inline-block bg-orange-600 text-white px-8 py-3 rounded-xl font-bold hover:bg-orange-700 transition">
+                    Contactar ahora ↗
+                </a>
             </div>
         </div>
     </section>
 
-    <section id="agenda" class="max-w-4xl mx-auto px-6 py-20 text-center">
-        <div class="bg-stone-900 text-white p-12 rounded-[3rem] shadow-xl">
-            <h2 class="text-3xl font-bold mb-6">¿Estás listo/a para el cambio profundo?</h2>
-            <p class="text-stone-400 mb-10 text-sm max-w-lg mx-auto">El psicoanálisis no promete soluciones rápidas, sino una vida renovada desde adentro.</p>
-            <a href="https://wa.me/5217222616255" class="inline-block bg-orange-600 text-white px-10 py-4 rounded-2xl font-bold hover:bg-orange-700 transition">
-                Agenda tu sesión inicial ↗
-            </a>
-        </div>
-    </section>
-    <div class="flex flex-col items-center justify-center py-10 opacity-80">
-    <div class="h-[1px] w-24 bg-orange-200 mb-6"></div> <p class="font-serif italic text-stone-400 text-sm mb-2">Con afecto para la,</p>
-    
-    <span style="font-family: 'Caveat', cursive; font-size: 2.2rem; color: #b45309;">
-        Dra. Marcela Miranda
-    </span>
-    
-    <p class="text-[10px] uppercase tracking-[3px] text-stone-400 mt-2">2026 @SantiagoPsicoDev | Desarrollando autonomia</p>
+    <footer class="flex flex-col items-center justify-center py-12 opacity-80">
+        <div class="h-[1px] w-24 bg-orange-200 mb-6"></div>
+        <p class="font-serif italic text-stone-400 text-sm mb-2">Con afecto para la,</p>
+        <span style="font-family: 'Caveat', cursive; font-size: 2.5rem; color: #b45309;">Dra. Marcela Miranda</span>
+        <p class="text-[10px] uppercase tracking-[3px] text-stone-400 mt-4">2026 @SantiagoPsicoDev | Desarrollando autonomía</p>
+    </footer>
+
+    <div id="mi-camino-modal">
+        <div class="btn-cerrar" onclick="cerrarCamino()"><i class="fas fa-times"></i></div>
+        
+        <div class="max-w-3xl mx-auto py-20 px-6">
+            <div class="flex items-center gap-3 mb-4">
+                <i class="fas fa-route text-orange-600 text-xl"></i> 
+                <span class="text-orange-600 font-bold tracking-widest uppercase text-xs">Trayectoria y Propósito</span>
+            </div>
+            <h2 class="text-5xl font-bold text-stone-900 mb-8" style="font-family: 'DM Serif Display', serif;">Mi Camino</h2>
+            
+            <div class="space-y-8 text-lg text-stone-700 leading-relaxed">
+                <p class="border-l-4 border-orange-200 pl-6 italic text-stone-500">
+                    Aquí va la historia de vida y formación académica de la Dra. Marcela...
+                </p>
+                
+                <p>A lo largo de mi trayectoria profesional, he dedicado mi labor a la escucha profunda del inconsciente, facilitando procesos de autonomía y autoconocimiento.</p>
+
+               <div class="bg-white p-4 shadow-xl rounded-sm rotate-2 border border-stone-100 my-10">
+    <img 
+        src="Foto2.jpeg" 
+        alt="Dra. Marcela Miranda - Momentos de formación" 
+        class="w-full h-80 object-cover rounded shadow-inner"
+    >
+    <p class="mt-4 text-center font-serif text-sm text-stone-400 italic">
+        <i class="fas fa-camera-retro mr-2"></i> Momentos de formación y clínica
+    </p>
 </div>
 
-</body>
+                <p>Especializarme en la clínica del inconsciente me ha permitido abrir puertas que otros métodos ignoran, enfocándome en la verdad del sujeto.</p>
+            </div>
+        </div>
+    </div>
 
+    <script>
+        function abrirCamino() {
+            document.getElementById('mi-camino-modal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function cerrarCamino() {
+            document.getElementById('mi-camino-modal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Cerrar con la tecla Esc
+        window.onkeydown = function(event) {
+            if (event.key === "Escape") { cerrarCamino(); }
+        }
+    </script>
+</body>
 </html>

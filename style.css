@@ -139,3 +139,116 @@ footer {
     background: var(--texto-oscuro);
     color: var(--blanco);
 }
+/* Contenedor principal para centrar la tarjeta */
+.psychoanalysis-section {
+    display: flex;
+    justify-content: center;
+    padding: 50px 20px;
+    background-color: #fdf6ed; /* Fondo crema muy claro */
+}
+
+/* La tarjeta estilo Polaroid */
+.polaroid-card {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 15px; /* Esquinas redondeadas suaves */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Sombra elegante */
+    max-width: 400px;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+/* Imagen con bordes redondeados internos */
+.image-container img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    display: block;
+}
+
+/* Estilo de la frase (Naranja suave) */
+.quote-container {
+    margin-top: 25px;
+    padding: 0 10px;
+}
+
+.quote-container p {
+    font-family: 'Lora', serif; /* Una fuente elegante para la frase */
+    font-style: italic;
+    color: #d4a373; /* Tonalidad naranja tierra */
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+.author {
+    display: block;
+    font-weight: bold;
+    color: #bc8a5f;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* --- MAGIA DE MOVIMIENTO --- */
+
+.animated-float {
+    animation: floatAnimation 5s ease-in-out infinite;
+}
+
+@keyframes floatAnimation {
+    0% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-12px) rotate(1deg); } /* Sube y gira un poquito */
+    100% { transform: translateY(0px) rotate(0deg); }
+}
+
+/* Interacción al pasar el mouse */
+.polaroid-card:hover {
+    box-shadow: 0 15px 45px rgba(212, 163, 115, 0.3);
+    cursor: pointer;
+}
+/* Estilos para la subpágina 'Mi Camino' */
+#mi-camino-modal {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    background: rgba(255, 250, 240, 0.98); /* Color crema de la Dra. */
+    overflow-y: auto;
+    padding: 2rem;
+}
+
+#mi-camino-modal.active {
+    display: block;
+    animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.btn-cerrar {
+    position: fixed;
+    top: 25px;
+    right: 25px;
+    cursor: pointer;
+    background: white;
+    color: #c2410c;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    border: 1px solid #ffedd5;
+}
+
+.btn-cerrar:hover {
+    transform: rotate(90deg);
+    background: #c2410c;
+    color: white;
+}
